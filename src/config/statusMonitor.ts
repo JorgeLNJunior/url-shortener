@@ -1,9 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import statusMonitor from 'express-status-monitor';
-import { createConnection } from 'typeorm';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const config = require('../config/database');
+import mongoose from 'mongoose';
 
 export const monitor = statusMonitor({
   path: '/admin/status',
@@ -21,14 +18,21 @@ export const monitor = statusMonitor({
 export const dbHealthRoute = async (
   req: Request,
   res: Response,
-  next: NextFunction,
 ): Promise<unknown> => {
   try {
-    const connection = await createConnection({ name: 'health', ...config });
-    await connection.query('SELECT * FROM user LIMIT 1');
-    await connection.close();
+    const mongoURI = process.env.MONGO_URI || 'mongodb://localhost/db';
+
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+    });
+    await mongoose.disconnect();
     return res.status(200).json({ status: 200, message: 'ok' });
   } catch (error) {
-    next(error);
+    return res
+      .status(500)
+      .json({ status: 500, message: 'database error', error: [error] });
   }
 };
