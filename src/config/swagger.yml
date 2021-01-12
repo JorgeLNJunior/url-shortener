@@ -1,0 +1,195 @@
+openapi: '3.0.2'
+info:
+  title: Typescript project
+  description: OpenApi Docs
+  version: '1.2.0'
+  contact:
+    name: Jorge Junior
+    email: jorgelnjunior@gmail.com
+    url: https://github.com/JorgeLNJunior
+  license:
+    name: MIT
+    url: https://github.com/JorgeLNJunior/typescript-project/blob/master/LICENSE.md
+servers:
+  - url: http://localhost:3000
+    description: local development server
+paths:
+  /login:
+    post:
+      description: authenticate a user and return a jwt token
+      summary: Authenticate a user
+      tags:
+        - "authentication"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user-login-body'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: object
+                    example: eyJhbGciOIUzI1NiC.jE2MTAyODc5NTh9.Q3vSXG_mcFd-5kTfMMWTlQw
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorized-error'
+  /register:
+    post:
+      summary: Register a user
+      description: Register a new user and return his data
+      tags:
+        - "authentication"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user-register-body'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        '400':
+          description: invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad-request-error'
+  /users:
+    get:
+      summary: Get Users
+      description: 'Return a list with all created users.'
+      tags:
+        - "users"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref:  '#/components/schemas/users-response'
+components:
+  schemas:
+    users-response:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 200
+        users:
+          type: array
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                example: 2f11909a-9f5d-4320-bf73-3302d7bb870e
+              name:
+                type: string
+                example: John
+              email:
+                type: string
+                example: john.owens@gmail.com
+              password:
+                type: string
+                example: $2b$10$yymIchrLm6G1QQ4BlpjMrea5teSc02IrqR4/c7vqI2XFVOigp3WhK
+              createdAt:
+                type: string
+                example: 2020-10-26T20:40:04.000Z
+              updatedAt:
+                type: string
+                example: 2020-11-10T20:35:02.000Z
+    user:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            uuid:
+              type: string
+              example: 2f11909a-9f5d-4320-bf73-3302d7bb870e
+            name:
+              type: string
+              example: John
+            email:
+              type: string
+              example: john.owens@gmail.com
+            password:
+              type: string
+              example: $2b$10$yymIchrLm6G1QQ4BlpjMrea5teSc02IrqR4/c7vqI2XFVOigp3WhK
+            createdAt:
+              type: string
+              example: 2020-10-26T20:40:04.000Z
+            updatedAt:
+              type: string
+              example: 2020-11-10T20:35:02.000Z
+    bad-request-error:
+      type: object
+      properties:
+        status:
+          type: number
+          example: 400
+        message:
+          type: string
+          example: bad request
+        errors:
+          type: array
+          items:
+            type: string
+            example: email must be a valid email
+    unauthorized-error:
+      type: object
+      properties:
+        status:
+          type: number
+          example: 401
+        message:
+          type: string
+          example: unauthorized
+        errors:
+          type: array
+          items:
+            type: string
+            example: invalid credentials
+    user-register-body:
+      type: object
+      required:
+        - name
+        - email
+        - password
+      properties:
+        name:
+          type: string
+          example: John
+        email:
+          type: string
+          example: john.owens@gmail.com
+        password:
+          type: string
+          example: pATsQdlY
+          minLength: 6
+    user-login-body:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          example: john.owens@gmail.com
+        password:
+          type: string
+          example: pATsQdlY
