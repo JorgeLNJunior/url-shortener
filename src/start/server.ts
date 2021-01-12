@@ -1,7 +1,6 @@
 import chalk from 'chalk';
 import { format } from 'date-fns';
 import { createHttpTerminator } from 'http-terminator';
-import { getConnection } from 'typeorm';
 
 import app from './app';
 
@@ -31,10 +30,7 @@ const server = app.listen(port, () => {
       console.log(closeMessage);
 
       const httpTerminator = createHttpTerminator({ server: server });
-      const connection = getConnection();
-
       await httpTerminator.terminate();
-      await connection.close();
     });
   }
 });
