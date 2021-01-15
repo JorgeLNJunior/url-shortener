@@ -25,7 +25,7 @@ module.exports = {
     '!<rootDir>/src/start/**',
     '!<rootDir>/src/config/**',
     '!<rootDir>/src/database/migration/**',
-    '!<rootDir>/src/@types/**',
+    '!<rootDir>/src/helpers/message.helper.ts',
   ],
 
   // The directory where Jest should output its coverage files
