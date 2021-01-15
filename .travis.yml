@@ -4,11 +4,9 @@ dist: xenial
 node_js:
 - 12
 services:
-  - mysql
+  - mongodb
 env:
-  - DB_USER=root DB_PASS=
-before_install:
-  - mysql -e 'CREATE DATABASE test;'
+  - MONGO_URI=mongodb://127.0.0.1/test
 script:
   - npm run lint
   - npm run test:ci
