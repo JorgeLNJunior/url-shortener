@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
-import { UsersController } from './app/controller/users.controller';
+import { AppController } from './app/controller/app.controller';
 import { dbHealthRoute } from './config/statusMonitor';
 
 const router = Router();
-const usersController = new UsersController();
+const appController = new AppController();
 
-router.get('/users', usersController.get);
+router.post('/shorten', appController.shorten);
 
 router.get('/admin/health/database', dbHealthRoute);
 
