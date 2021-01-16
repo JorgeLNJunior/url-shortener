@@ -8,6 +8,8 @@ const appController = new AppController();
 
 router.post('/shorten', appController.shorten);
 
+router.get('/:slug', appController.redirect);
+
 router.get('/admin/health/database', dbHealthRoute);
 
 export default router;

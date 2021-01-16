@@ -26,4 +26,28 @@ export class AppController {
       next(error);
     }
   }
+
+  async redirect(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void | Response<unknown>> {
+    const appService = new AppService();
+    const { slug } = req.params;
+
+    try {
+      let { original } = await appService.getBySlug(slug);
+
+      if (
+        !original.startsWith('http://', 0) &&
+        !original.startsWith('https://', 0)
+      ) {
+        original = 'http://' + original;
+      }
+
+      return res.redirect(original);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

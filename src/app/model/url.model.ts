@@ -1,8 +1,9 @@
 import { Document, model, Schema } from 'mongoose';
 
 export interface IUrl extends Document {
-  originalUrl: string;
-  shortUrl: string;
+  original: string;
+  short: string;
+  slug: string;
 }
 
 const UrlSchema = new Schema(

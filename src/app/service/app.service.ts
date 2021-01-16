@@ -1,6 +1,7 @@
 import Faker from 'faker';
 
 import { getEmptyHostMsg } from '../../helpers/message.helper';
+import { NotFoundError } from '../error/notFound.error';
 import Url, { IUrl } from '../model/url.model';
 
 export class AppService {
@@ -25,6 +26,15 @@ export class AppService {
     });
 
     return shortUrl;
+  }
+
+  async getBySlug(slug: string): Promise<IUrl> {
+    const url = await Url.findOne({ slug: slug });
+
+    if (!url)
+      throw new NotFoundError([`url with slug "${slug}" was not found`]);
+
+    return url;
   }
 }
 
