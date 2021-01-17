@@ -1,8 +1,8 @@
 {
-  "name": "typescript-project",
+  "name": "url-shortener",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/src/start/server.js",
+  "description": "url-shortener",
+  "main": "dist/start/server.js",
   "scripts": {
     "build": "rimraf ./dist && tsc",
     "start": "NODE_ENV=production node .",
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JorgeLNJunior/typescript-project.git"
+    "url": "git+https://github.com/JorgeLNJunior/url-shortener.git"
   },
   "author": "JorgeLNJunior",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JorgeLNJunior/typescript-project/issues"
+    "url": "https://github.com/JorgeLNJunior/url-shortener/issues"
   },
-  "homepage": "https://github.com/JorgeLNJunior/typescript-project#readme",
+  "homepage": "https://github.com/JorgeLNJunior/url-shortener#readme",
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
