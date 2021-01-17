@@ -1,3 +1,4 @@
+/* eslint-disable jest/expect-expect */
 import mongoose from 'mongoose';
 import request from 'supertest';
 
@@ -30,6 +31,14 @@ describe('App (e2e)', () => {
 
     expect(status).toBe(400);
     expect(body).toHaveProperty('errors');
+  });
+
+  test('/redirect (GET) should return 302 and redirect to original url', async () => {
+    const { slug, original } = await UrlFactory.aUser()
+      .withUrl('https://google.com')
+      .persist();
+
+    await request(app).get(`/${slug}`).expect(302).expect('Location', original);
   });
 
   test('/notFound (GET) should return 404 if route does not exist', async () => {
