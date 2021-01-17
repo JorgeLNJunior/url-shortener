@@ -17,7 +17,6 @@ export class UrlFactory {
 
   async persist(): Promise<IUrl> {
     const host = 'http://localhost:3000';
-
     const ramdomString = Faker.random.alphaNumeric(5);
 
     const url = await Url.create({
@@ -25,7 +24,7 @@ export class UrlFactory {
       short: host + '/' + ramdomString,
       slug: ramdomString,
     });
-    console.log(url);
+
     return url;
   }
 
