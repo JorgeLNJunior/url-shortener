@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { createHttpTerminator } from 'http-terminator';
 import mongoose from 'mongoose';
 
+import { getEmptyHostMsg } from '../helpers/message.helper';
 import app from './app';
 
 const port = parseInt(process.env.PORT as string) || 3000;
@@ -49,6 +50,8 @@ const server = app.listen(port, async () => {
       console.log(dbErrorMessage);
       console.log(error);
     });
+
+  if (!process.env.HOST) console.log(getEmptyHostMsg());
 
   if (process.env.NODE_ENV === 'production') {
     process.on('SIGTERM', async () => {
