@@ -2,7 +2,7 @@ openapi: '3.0.2'
 info:
   title: URL Shortener
   description: OpenApi Docs
-  version: '1.0.0'
+  version: '1.0.3'
   license:
     name: MIT
     url: https://github.com/JorgeLNJunior/typescript-project/blob/master/LICENSE.md
