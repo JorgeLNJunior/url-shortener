@@ -9,6 +9,8 @@ info:
 servers:
   - url: http://localhost:3000
     description: local development server
+  - url: https://vkcru.herokuapp.com
+    description: production server
 paths:
   /{slug}:
     get:
