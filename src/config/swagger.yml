@@ -120,6 +120,8 @@ components:
         url:
           type: string
           example: http://google.com
+          description: URL to be shortened
         slug:
           type: string
           example: custom
+          description: custom URL slug. White spaces will be removed      
