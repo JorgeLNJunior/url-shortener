@@ -19,7 +19,10 @@ export class AppController {
 
       if (error) throw new BadRequestError([error.message]);
 
-      const shortUrl = await appService.shorten({ url: value.url });
+      const shortUrl = await appService.shorten({
+        url: value.url,
+        slug: value.slug,
+      });
 
       return res.status(201).json({ status: 201, url: shortUrl });
     } catch (error) {
