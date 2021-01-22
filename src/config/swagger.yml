@@ -120,3 +120,6 @@ components:
         url:
           type: string
           example: http://google.com
+        slug:
+          type: string
+          example: custom
