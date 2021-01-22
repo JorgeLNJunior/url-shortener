@@ -4,7 +4,7 @@ export class UrlValidator {
   validate(body: unknown): ValidationResult {
     const schema = Joi.object({
       url: Joi.string().required(),
-      slug: Joi.string().optional().min(5).max(12),
+      slug: Joi.string().optional().min(5).max(12).replace(' ', ''),
     });
 
     return schema.validate(body, { stripUnknown: true });
